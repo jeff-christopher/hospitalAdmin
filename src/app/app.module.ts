@@ -4,6 +4,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { PagesModule } from './pages/pages.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 /**
  * Routes
@@ -27,10 +29,14 @@ import { RegisterComponent } from './login/register.component';
   ],
   imports: [
     BrowserModule,
-    PagesModule,
     APP_ROUTES,
+    PagesModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

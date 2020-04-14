@@ -10,7 +10,7 @@ export class SidebarService {
       titulo: 'Principal',
       icono: 'mdi mdi-gauge',
       submenu: [
-        {  titulo: 'My Theme', url: '/account-settings' },
+        {  titulo: 'My Themes', url: '/account-settings' },
         {  titulo: 'Dashboard', url: '/dashboard' },
         {  titulo: 'ProgressBar', url: '/progress' },
         {  titulo: 'Graficas', url: '/graficas1' },
