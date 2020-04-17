@@ -6,6 +6,11 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 /**
+ * Pipes
+ */
+import { PipesModule } from '../pipes/pipes.module';
+
+/**
  * Components
  */
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
@@ -27,6 +32,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     imports:[
         RouterModule,
         CommonModule,
+        PipesModule,
     ]
 })
 

@@ -8,6 +8,11 @@ import { ChartsModule } from 'ng2-charts';
 import { BrowserModule } from '@angular/platform-browser';
 
 /**
+ * Pipes
+ */
+import { PipesModule } from '../pipes/pipes.module';
+
+/**
  * Pages
  */
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -28,6 +33,7 @@ import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.co
  * Routes
  */
 import { PAGES_ROUTES } from './pages.routes';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
     declarations: [
@@ -40,6 +46,7 @@ import { PAGES_ROUTES } from './pages.routes';
         AccountSettingsComponent,
         PromesasComponent,
         RxjsComponent,
+        ProfileComponent,
     ],
     exports: [
         DashboardComponent,
@@ -55,6 +62,7 @@ import { PAGES_ROUTES } from './pages.routes';
         FormsModule,
         ChartsModule,
         BrowserModule,
+        PipesModule,
     ]
 })
 
