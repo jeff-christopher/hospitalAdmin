@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, JsonpInterceptor } from '@angular/common/http'; 
+import { HttpClient} from '@angular/common/http'; 
 import { User } from 'src/app/models/user.model';
 import { URL_SERVICES } from 'src/app/config/config';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import swal from 'sweetalert';
 import { Router } from '@angular/router';
 import { UploadDocService } from '../uploadDoc/upload-doc.service';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -59,7 +60,13 @@ export class UserService {
                   swal('User created', res.user.email, 'success');
                   return res.user;
 
-                }
+                },
+                catchError(
+                  err => {
+                    swal('Error', err.error.message , 'error');
+                    return throwError(err);
+                  }
+                )
               ));
    }
 
@@ -72,7 +79,13 @@ export class UserService {
                 map((res: any) => {
                   this.saveStorage(res.id, res.token, res.user);
                   return true;
-                })
+                }),
+                catchError(
+                  err => {
+                    swal('Error', err.error.message , 'error');
+                    return throwError(err);
+                  }
+                )
               );
 
    }
@@ -88,6 +101,10 @@ export class UserService {
                  map((res:any) => {
                    this.saveStorage(res.id, res.token, res.user);
                    return true;
+                 }),
+                 catchError( err => {
+                    swal('Error', err.error.message , 'error');
+                    return throwError(err);
                  })
                );
    }
@@ -116,9 +133,10 @@ export class UserService {
               .pipe(
                 map(( res:any ) => {
                   
-                  const userUpdate = res.user;
-
-                  this.saveStorage(userUpdate._id, this.token, userUpdate);
+                  if(user._id === this.user._id){
+                    const userUpdate = res.user;
+                    this.saveStorage(userUpdate._id, this.token, userUpdate);
+                  }
                   swal('User updated', user.name, 'success');
 
                   return true;
@@ -139,10 +157,42 @@ export class UserService {
               }
             )
             .catch(
-              (error)=>{
+              (error) => {
               console.log(error);
               }
-            )
+            );
+
+   }
+
+   loadUsers(from: number = 0){
+    const URL = URL_SERVICES + `user?from=${from}`;
+    
+    return this.http.get(URL);
+
+   }
+
+   searchUsers(search: string){
+     const URL = URL_SERVICES + `search/collection/users/${search}`;
+
+     return this.http.get(URL)
+              .pipe(
+                map(
+                  (res: any) => res.users
+                )
+              );
+   }
+
+   deleteUser(id: string){
+
+    const URL = URL_SERVICES + `user/${id}?token=${this.token}`;
+    return this.http.delete(URL)
+              .pipe(
+                map(
+                  (res: any) => {
+                    return true;
+                  }
+                )
+              );
 
    }
 

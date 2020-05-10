@@ -11,7 +11,6 @@ import { resolve } from 'url';
 export class UploadDocService {
 
   constructor(private http: HttpClient) {
-    
    }
 
   uploadFile(file: File, type: string, id: string): Promise<any> {

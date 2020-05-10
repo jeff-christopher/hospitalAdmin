@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { User } from '../../models/user.model';
 import { UserService } from 'src/app/services/service.index';
 import swal from 'sweetalert';
@@ -9,18 +9,31 @@ import swal from 'sweetalert';
   templateUrl: './profile.component.html',
   styles: []
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, AfterViewInit {
   user: User;
+  @ViewChild('userProfile', null) userProfileElement: ElementRef; 
+  @ViewChild('userPicture', null) userPictureElement: ElementRef;
   imageLoad: File;
   imageTemp: string | ArrayBuffer;
+  userPictureHeight: number;
+  userProfileHeight: number;
+    
 
   constructor(public userService: UserService) { 
 
     this.user = this.userService.user;
 
+
   }
 
   ngOnInit() {
+   
+  }
+
+
+  ngAfterViewInit() {
+
+    
   }
 
   save( user: User ) {
@@ -61,6 +74,12 @@ export class ProfileComponent implements OnInit {
   changeImage(){
 
     this.userService.changeImage(this.imageLoad, this.user._id);
+
+  }
+
+  setUserElementsHeigth() {
+
+  
 
   }
 

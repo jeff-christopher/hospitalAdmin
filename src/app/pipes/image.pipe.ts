@@ -26,7 +26,7 @@ export class ImagePipe implements PipeTransform {
       url += '/doctors/' + image;
       break;
       case 'hospital':
-      url += '/hospitals' + image;
+      url += '/hospitals/' + image;
       break;
       default:
         console.log('You must send a valid type: user, doctor or hospital');

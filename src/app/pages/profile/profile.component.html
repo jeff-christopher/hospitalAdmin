@@ -1,9 +1,9 @@
-<div class="row animated fadeIn">
+<div class="row animated fadeIn" myMatchHeight="card">
     <div class="col-lg-7">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">User profile</h4>
-                <h6 class="card-subtitle">User name</h6>
+                <h4 class="card-title"> Profile Information </h4>
+                <h6 class="card-subtitle text-center">{{ user.name }}</h6>
                 <form ngNativeValidate #f="ngForm" (ngSubmit)="save( f.value )" class="form p-t-20">
                     <div class="form-group">
                         <label for="exampleInputuname">Name of User</label>
@@ -31,14 +31,14 @@
 
     <div class="col-lg-5">
         <div class="card">
-            <div class="card-body" align="center">
-                <h4 class="card-title">User picture</h4>
-                <h6 class="card-subtitle">User name</h6>
+            <div #userPicture class="card-body" align="center">
+                <h4 class="card-title">My photo</h4>
+                <h6 class="card-subtitle">{{ user.name }}</h6>
 
                 <img *ngIf="imageTemp" [src]="imageTemp" alt="" class="  w150">
                 <img *ngIf="!imageTemp" [src]="user.image | image" alt="" class="  w150">
 
-                <input (change)="selectImage( $event.target.files[0])" type="file">
+                <input style="margin-top: 20px;" (change)="selectImage( $event.target.files[0])" type="file">
 
                 <br>
                 <br>
@@ -46,7 +46,7 @@
                 <button (click)="changeImage()" [disabled]="!imageLoad" type="submit" class="btn btn-block btn-success waves-effect waves-light m-r-10">
                     <i class="fa fa-save"></i>
                         Update picture
-                    </button>
+                </button>
             </div>
         </div>
     </div>
